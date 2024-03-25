@@ -1,0 +1,145 @@
+food,characteristic,p_values,significant,food_name
+MILKONCEREALQUAN,smoke_often,3.73929e-09,significant,milkoncereal
+GROUP_STEAK_ROAST_FAT_ON_TOTAL_GRAMS,smoke_often,5.22033e-08,significant,steak roast fat on
+GROUP_CORN_FLAKES_CORN_PUFFS_TOTAL_GRAMS,smoke_often,6.02678e-07,significant,corn flakes corn puffs
+GROUP_PORK_FAT_ON_TOTAL_GRAMS,smoke_often,8.80307e-06,significant,pork fat on
+GROUP_SOY_MILK_TOTAL_GRAMS,smoke_rarely,1.61582e-05,significant,soy milk
+EGGROLLQUAN,dog,2.84762e-05,significant,eggroll
+GROUP_HOT_DOG_BEEF_OR_PORK_TOTAL_GRAMS,smoke_often,5.44728e-05,significant,hot dog beef or pork
+BUTTERQUAN,smoke_often,8.13207e-05,significant,butter
+GROUP_CORN_TOTAL_GRAMS,smoke_rarely,0.000231304,significant,corn
+GROUP_ICE_TEA_HOME_NO_SUGAR_TOTAL_GRAMS,smoke_often,0.000240465,significant,ice tea home no sugar
+GROUP_SOY_MILK_TOTAL_GRAMS,right_hand,0.000342389,significant,soy milk
+PORKCHOPSFREQ,smoke_often,0.000435439,significant,porkchops
+GROUP_CHEESEBURGER_MEAT_AND_CHEESE_TOTAL_GRAMS,smoke_rarely,0.000472015,significant,cheeseburger meat and cheese
+GROUP_TORTILLAS_CORN_TOTAL_GRAMS,smoke_rarely,0.00133174,significant,tortillas corn
+GROUP_CHOCOLATE_MILK_COCOA_HOT_CHOCOLATE_TOTAL_GRAMS,right_hand,0.00148978,significant,chocolate milk cocoa hot chocolate
+COFFEEDRINKSFREQ,cat,0.00163035,significant,coffeedrinks
+GROUP_ICE_TEA_BOTTLE_NO_SUGAR_TOTAL_GRAMS,smoke_rarely,0.00176796,significant,ice tea bottle no sugar
+GROUP_CARROTS_CARROT_MIXES_TOTAL_GRAMS,smoke_often,0.0023566,significant,carrots carrot mixes
+GROUP_CORN_BREAD_HUSH_PUPPIES_TOTAL_GRAMS,smoke_often,0.00239431,significant,corn bread hush puppies
+GROUP_COFFEE_CAFFEINE_TOTAL_GRAMS,smoke_often,0.00250377,significant,coffee caffeine
+LEMONADEFREQ,smoke_often,0.00261039,significant,lemonade
+COFFEEQUAN,smoke_often,0.00286546,significant,coffee
+WINEQUAN,smoke_often,0.00352774,significant,wine
+GROUP_SUGARYBEVG_TOTAL_GRAMS,diabetes,0.00426379,significant,sugarybevg
+ICEDTEAFREQ,dog,0.00458258,significant,icedtea
+SLICEDCHEESEQUAN,smoke_often,0.00494833,significant,slicedcheese
+GROUP_BREAD_WHITE_TOTAL_GRAMS,right_hand,0.00508263,significant,bread white
+GROUP_PEANUTS_OTHER_NUTS_SEEDS_TOTAL_GRAMS,cancer,0.00687619,significant,peanuts other nuts seeds
+GROUP_SUGARYBEVG_TOTAL_KCAL,diabetes,0.00730541,significant,sugarybevg
+BEEFPORKDISHQUAN,right_hand,0.00835294,significant,beefporkdish
+LEMONADEQUAN,dog,0.00855486,significant,lemonade
+MILKONCEREALFREQ,right_hand,0.00876115,significant,milkoncereal
+CARROTSQUAN,cancer,0.00887744,significant,carrots
+OTHERNUTSFREQ,cancer,0.0103197,significant,othernuts
+GROUP_SOY_MILK_TOTAL_GRAMS,left_hand,0.0124573,significant,soy milk
+POTATOESFREQ,cancer,0.0132241,significant,potatoes
+GROUP_CARROTS_CARROT_MIXES_TOTAL_GRAMS,cancer,0.0149679,significant,carrots carrot mixes
+COFFEEQUAN,never_smoked,0.015021,significant,coffee
+TOMATOJUICEQUAN,smoke_often,0.0154447,significant,tomatojuice
+COFFEEFREQ,never_smoked,0.0155968,significant,coffee
+GROUP_SUGARYBEVG_TOTAL_FREQUENCY,diabetes,0.0156027,significant,sugarybevg
+GROUP_COFFEE_CAFFEINE_TOTAL_GRAMS,never_smoked,0.0159953,significant,coffee caffeine
+GROUP_WHITE_POTATOES_NOT_FRIED_TOTAL_GRAMS,cancer,0.017404,significant,white potatoes not fried
+GROUP_CREAM_CHEESE_SOUR_CREAM_DIP_TOTAL_GRAMS,smoke_often,0.0174428,significant,cream cheese sour cream dip
+BEEFPORKDISHQUAN,left_hand,0.0174627,significant,beefporkdish
+GROUP_ENERGY_DRINKS_SUGAR_TOTAL_GRAMS,left_hand,0.0177187,significant,energy drinks sugar
+POTATOESQUAN,right_hand,0.0177364,significant,potatoes
+GROUP_COOK_FAT_BUTTER_MARGARINE_BLEND_TOTAL_GRAMS,right_hand,0.0187365,significant,cook fat butter margarine blend
+GROUP_TORTILLAS_CORN_TOTAL_GRAMS,right_hand,0.0192026,significant,tortillas corn
+BACONSAUSAGEFREQ,cat,0.0234711,significant,baconsausage
+GROUP_SAUSAGE_BACON_TOTAL_GRAMS,smoke_often,0.0243019,significant,sausage bacon
+GROUP_CREAM_CHEESE_SOUR_CREAM_DIP_TOTAL_GRAMS,never_smoked,0.0248134,significant,cream cheese sour cream dip
+CORNBREADQUAN,diabetes,0.0248527,significant,cornbread
+VEGGIESFREQ,right_hand,0.024899,significant,veggies
+PEANUTBUTTERQUAN,left_hand,0.025823,significant,peanutbutter
+CREAMCHEESEFREQ,smoke_often,0.0258409,significant,creamcheese
+CORNCHIPSFREQ,cancer,0.0261627,significant,cornchips
+GROUP_TOMATO_VEGETABLE_JUICE_TOTAL_GRAMS,smoke_rarely,0.0274084,significant,tomato vegetable juice
+CREAMCHEESEQUAN,never_smoked,0.0281185,significant,creamcheese
+GROUP_CORN_FLAKES_CORN_PUFFS_TOTAL_GRAMS,left_hand,0.0292514,significant,corn flakes corn puffs
+GROUP_CHOCOLATE_MILK_COCOA_HOT_CHOCOLATE_TOTAL_GRAMS,left_hand,0.0292646,significant,chocolate milk cocoa hot chocolate
+GROUP_SODA_SUGAR_CAFFEINE_TOTAL_GRAMS,diabetes,0.0295106,significant,soda sugar caffeine
+DONUTSQUAN,dog,0.0297147,significant,donuts
+OTHERBREADSFREQ,smoke_often,0.0303974,significant,otherbreads
+LEMONADEQUAN,cancer,0.0306178,significant,lemonade
+POTATOESQUAN,left_hand,0.0318448,significant,potatoes
+GROUP_FRENCH_FRIES_FRIED_POTATOES_TOTAL_GRAMS,left_hand,0.032477,significant,french fries fried potatoes
+SALTFREQ,left_hand,0.0329292,significant,salt
+GROUP_TABLE_SALT_TOTAL_GRAMS,cancer,0.0334331,significant,table salt
+GROUP_PORK_CHOPS_ROAST_HAM_TOTAL_GRAMS,never_smoked,0.0335817,significant,pork chops roast ham
+GROUP_OTHER_MILK_ALMOND_TOTAL_GRAMS,right_hand,0.0347225,significant,other milk almond
+GROUP_DONUTS_TOTAL_GRAMS,dog,0.0347775,significant,donuts
+STEAKFREQ,smoke_often,0.0356489,significant,steak
+CORNBREADFREQ,smoke_often,0.037354,significant,cornbread
+GROUP_WHOLE_MILK_4_PCT_FAT_TOTAL_GRAMS,right_hand,0.03795,significant,whole milk 4 pct fat
+GROUP_PUMPKIN_SWEET_POTATO_PIE_TOTAL_GRAMS,right_hand,0.0383649,significant,pumpkin sweet potato pie
+STEAKQUAN,smoke_often,0.0390012,significant,steak
+POTATOESQUAN,cancer,0.0396295,significant,potatoes
+GROUP_ICE_TEA_BOTTLE_SUGAR_TOTAL_GRAMS,diabetes,0.0402305,significant,ice tea bottle sugar
+TOMATOJUICEQUAN,never_smoked,0.0416116,significant,tomatojuice
+GROUP_COTTAGE_CHEESE_RICOTTA_TOTAL_GRAMS,cancer,0.0428578,significant,cottage cheese ricotta
+GROUP_BUTTER_AT_TABLE_TOTAL_GRAMS,smoke_often,0.0446551,significant,butter at table
+GROUP_SODA_SUGAR_CAFFEINE_TOTAL_GRAMS,never_smoked,0.0447,significant,soda sugar caffeine
+GROUP_WINE_RED_TOTAL_GRAMS,never_smoked,0.0450593,significant,wine red
+CORNCHIPSFREQ,smoke_often,0.0450849,significant,cornchips
+OTHERVEGGIESFREQ,left_hand,0.0452505,significant,otherveggies
+GROUP_SODA_SUGAR_CAFFEINE_TOTAL_GRAMS,smoke_rarely,0.0476889,significant,soda sugar caffeine
+HOTTEAQUAN,cancer,0.0477984,significant,hottea
+CORNFREQ,smoke_rarely,0.0482115,significant,corn
+CORNCHIPSFREQ,diabetes,0.051451,not significant,cornchips
+GROUP_WINE_WHITE_TOTAL_GRAMS,dog,0.0517171,not significant,wine white
+GROUP_CORN_BREAD_HUSH_PUPPIES_TOTAL_GRAMS,never_smoked,0.0520969,not significant,corn bread hush puppies
+GROUP_ICE_TEA_BOTTLE_SUGAR_TOTAL_GRAMS,dog,0.0529349,not significant,ice tea bottle sugar
+BACONSAUSAGEQUAN,smoke_often,0.054621,not significant,baconsausage
+CARROTSFREQ,cancer,0.0568499,not significant,carrots
+WALNUTSFREQ,never_smoked,0.0571278,not significant,walnuts
+BEEFPORKDISHFREQ,left_hand,0.0577258,not significant,beefporkdish
+GROUP_BREAD_WHITE_TOTAL_GRAMS,left_hand,0.0581444,not significant,bread white
+GROUP_PORK_CHOPS_ROAST_HAM_TOTAL_GRAMS,smoke_rarely,0.0600925,not significant,pork chops roast ham
+GROUP_COTTAGE_CHEESE_RICOTTA_TOTAL_GRAMS,never_smoked,0.060113,not significant,cottage cheese ricotta
+EGGSFREQ,cancer,0.060747,not significant,eggs
+OTHERVEGGIESQUAN,never_smoked,0.0622881,not significant,otherveggies
+GROUP_LATTE_CAPPUCCINO_WHOLE_MILK_TOTAL_GRAMS,cat,0.0623395,not significant,latte cappuccino whole milk
+GROUP_LATTE_CAPPUCCINO_1_PCT_OR_2_PCT_MILK_TOTAL_GRAMS,cat,0.0632954,not significant,latte cappuccino 1 pct or 2 pct milk
+LEMONADEFREQ,left_hand,0.0637838,not significant,lemonade
+GROUP_WALNUTS_FLAX_SEEDS_TOTAL_GRAMS,diabetes,0.0643588,not significant,walnuts flax seeds
+BEEFPORKDISHFREQ,right_hand,0.0652773,not significant,beefporkdish
+SLICEDCHEESEQUAN,never_smoked,0.0665637,not significant,slicedcheese
+GROUP_ENERGY_DRINKS_LOW_SUGAR_TOTAL_GRAMS,never_smoked,0.0676025,not significant,energy drinks low sugar
+GROUP_HOT_TEA_DECAF_TOTAL_GRAMS,cat,0.0695888,not significant,hot tea decaf
+GROUP_BREAD_MULTI_GRAIN_TOTAL_GRAMS,cat,0.0699867,not significant,bread multi grain
+CREAMCHEESEFREQ,never_smoked,0.070487,not significant,creamcheese
+COTTAGECHEESEFREQ,cancer,0.0705536,not significant,cottagecheese
+GROUP_COOK_FAT_BUTTER_OR_GHEE_TOTAL_GRAMS,dog,0.0706156,not significant,cook fat butter or ghee
+OTHERBREADSFREQ,cat,0.0708962,not significant,otherbreads
+WINEFREQ,diabetes,0.0743137,not significant,wine
+SALTFREQ,cancer,0.0745339,not significant,salt
+COFFEEDRINKSQUAN,smoke_often,0.075257,not significant,coffeedrinks
+GROUP_TOMATO_VEGETABLE_JUICE_TOTAL_GRAMS,never_smoked,0.0758203,not significant,tomato vegetable juice
+CORNQUAN,dog,0.0762491,not significant,corn
+GROUP_CHEESEBURGER_MEAT_AND_CHEESE_TOTAL_GRAMS,never_smoked,0.0770962,not significant,cheeseburger meat and cheese
+POPCORNFREQ,left_hand,0.0772048,not significant,popcorn
+STEAKQUAN,left_hand,0.077525,not significant,steak
+FRIEDORBREADEDCHICKENFREQ,diabetes,0.0781644,not significant,friedorbreadedchicken
+OTHERNUTSFREQ,left_hand,0.0793245,not significant,othernuts
+GROUP_FRENCH_FRIES_FRIED_POTATOES_TOTAL_GRAMS,cancer,0.0793931,not significant,french fries fried potatoes
+CORNBREADQUAN,never_smoked,0.0796495,not significant,cornbread
+STEAKFREQ,right_hand,0.07974,not significant,steak
+STEAKQUAN,right_hand,0.0817092,not significant,steak
+GROUP_BREAD_MULTI_GRAIN_TOTAL_GRAMS,cancer,0.0833648,not significant,bread multi grain
+GROUP_FRENCH_FRIES_FRIED_POTATOES_TOTAL_GRAMS,right_hand,0.0838672,not significant,french fries fried potatoes
+POTATOESFREQ,dog,0.0842797,not significant,potatoes
+GROUP_PORK_FAT_ON_TOTAL_GRAMS,left_hand,0.084334,not significant,pork fat on
+PORKCHOPSFREQ,never_smoked,0.0909952,not significant,porkchops
+POPCORNFREQ,never_smoked,0.0914755,not significant,popcorn
+DONUTSFREQ,dog,0.0932206,not significant,donuts
+GROUP_ICE_TEA_HOME_SUGAR_TOTAL_GRAMS,never_smoked,0.0936395,not significant,ice tea home sugar
+COFFEEFREQ,right_hand,0.095247,not significant,coffee
+BUTTERQUAN,right_hand,0.0964252,not significant,butter
+GROUP_PEANUTS_OTHER_NUTS_SEEDS_TOTAL_GRAMS,left_hand,0.0965127,not significant,peanuts other nuts seeds
+GROUP_WALNUTS_FLAX_SEEDS_TOTAL_GRAMS,never_smoked,0.0965388,not significant,walnuts flax seeds
+GROUP_COOK_FAT_CORN_VEGETABLE_OIL_BLENDS_TOTAL_GRAMS,diabetes,0.0988465,not significant,cook fat corn vegetable oil blends
+EGGSQUAN,cancer,0.0996338,not significant,eggs
+CORNFREQ,smoke_often,0.0999783,not significant,corn

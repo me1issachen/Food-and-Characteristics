@@ -1,0 +1,636 @@
+<html>
+    <head>
+        <title>Food and Cancer</title>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v7.min.js"></script> 
+        <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>       
+        
+        <style>
+            body{
+                font-family: 'Varela Round';
+                background-color: #ededed;
+            }
+            .filter_container {
+                display: flex;
+                flex-wrap:wrap;
+                justify-content: flex-start;
+                margin: 10px;
+                margin-bottom: 50px;
+                gap: 50px;
+                
+            }
+            .type_button {
+                background-color: white;
+                color: black;
+                border-radius: 20px;
+                border: none;
+                padding: 5px 7px;
+                margin: 5px 5px 0px 0px;
+                border: 3px solid #5B6C9A;
+            }
+
+            .type_button:hover {
+                background-color: #5B6C9A;
+                color: white;
+                border: 3px solid #363946;
+            }
+
+            .selected-type {
+                background-color: #5B6C9A;
+                border: 3px solid #363946;
+                color: white;
+                border-radius: 20px;
+                padding: 5px 7px;
+                margin: 5px 5px 0px 0px;
+            }
+            .text{
+                font-family: 'Varela Round';
+            }
+            .filters{
+                display:flex;
+                flex-direction:row;
+            }
+
+            #food-dropdown{
+                display:flex;
+                flex-direction:column;
+            }
+
+  
+         
+        </style>
+    </head>
+
+    <body>
+        <h1>Foods Relation to Other Things</h1>
+        <div class =  "filters">
+            <div class="filter-container" style="height:100px; width:300px;">
+                <h2>Filter by characteristic</h2>
+            </div>
+            
+            <div id="food-dropdown" height="200px">
+                <h2>Filter by food</h2>
+                <select multiple id="selectButton"></select>
+            </div>
+        </div>
+
+            <div class = "svg-container" style="display: inline-block;">
+                <svg id="chord-diagram" width="440px" height="600px"></svg>
+            </div>
+            
+            <div class = "svg-container" style="display: inline-block;">
+                <svg id="bubble-diagram" width="700px" height="700px"></svg>
+        </div>
+        
+        <script>
+        const requestData = async()=>{
+            let p_vals= await d3.csv("p_val.csv") //not using p values
+            let sig = await d3.csv("significant1.csv");
+
+            p_vals.forEach((d, i) => {
+            d["p_values"] = parseFloat(d["p_values"])
+            })
+            sig.forEach((d,i)=>{
+                d["p_values"] = parseFloat(d["p_values"])
+            })
+            var margin = {left:90, top:90, right:90, bottom:90}
+            var svg = d3.select("#chord-diagram")
+            var width = svg.attr("width")
+            var height = svg.attr("height")
+            chartWidth = width - margin.left - margin.right
+            chartHeight = height - margin.top - margin.bottom
+
+            var g = svg.append("g")
+                .attr("transform", "translate(220,350)")
+
+            var colors = ["#5B6C9A", "#F97068", "#D1D646", "#57C4E5", "#589D87", "#363946", "#EFCA08", "#CBC0AD"]
+            var colorScale = d3.scaleOrdinal().domain(d3.range(colors.length)).range(colors);
+            var names = ['cancer', 'diabetes', 'smoke_often', 'smoke_rarely', 'never_smoked', 'left_hand', 'right_hand', 'cat', 'dog']
+            var matrix = [[0.5185185185185185, 0.18518518518518517, 0.037037037037037035, 0.0, 0.35185185185185186, 0.05555555555555555, 0.5, 0.24074074074074073, 0.4074074074074074], [0.18518518518518517, 0.2777777777777778, 0.0, 0.018518518518518517, 0.2037037037037037, 0.018518518518518517, 0.25925925925925924, 0.14814814814814814, 0.18518518518518517], [0.037037037037037035, 0.0, 0.037037037037037035, 0.0, 0.0, 0.018518518518518517, 0.037037037037037035, 0.018518518518518517, 0.037037037037037035], [0.0, 0.018518518518518517, 0.0, 0.05555555555555555, 0.0, 0.018518518518518517, 0.037037037037037035, 0.018518518518518517, 0.05555555555555555], [0.35185185185185186, 0.2037037037037037, 0.0, 0.0, 0.7037037037037037, 0.09259259259259259, 0.6481481481481481, 0.24074074074074073, 0.5185185185185185], [0.05555555555555555, 0.018518518518518517, 0.018518518518518517, 0.018518518518518517, 0.09259259259259259, 0.12962962962962962, 0.05555555555555555, 0.018518518518518517, 0.1111111111111111], [0.5, 0.25925925925925924, 0.037037037037037035, 0.037037037037037035, 0.6481481481481481, 0.05555555555555555, 0.9259259259259259, 0.35185185185185186, 0.7037037037037037], [0.24074074074074073, 0.14814814814814814, 0.018518518518518517, 0.018518518518518517, 0.24074074074074073, 0.018518518518518517, 0.35185185185185186, 0.35185185185185186, 0.25925925925925924], [0.4074074074074074, 0.18518518518518517, 0.037037037037037035, 0.05555555555555555, 0.5185185185185185, 0.1111111111111111, 0.7037037037037037, 0.25925925925925924, 0.7592592592592593]]
+      
+            for (let i = 0; i < matrix.length; i++) {
+                matrix[i][i] = 0;
+            }
+            
+            var res = d3.chord()
+                .padAngle(0.05)
+                .sortSubgroups(d3.descending)
+                (matrix)
+            
+            // Append arcs for each group
+            g.selectAll("path.group")
+                .data(res.groups)
+                .enter()
+                .append("path")
+                .attr("class", "group")
+                .style("fill", "grey")
+                .style("stroke", "black")
+                .attr("d", d3.arc()
+                    .innerRadius(200)
+                    .outerRadius(210)
+                );
+
+            let title = svg.append("g")
+                    .attr("class", "title")
+                    .style("display", "none");
+
+            title.append("text")
+                .attr("id", "title")
+                .attr("x", 50)
+                .attr("y", 100)
+                // .attr("text-anchor", "middle")
+                .style("font-size", "20px")
+                .style("fill", "#363946")
+                .style("font-family",  'Varela Round')
+            
+
+            var clicked = 0;
+            var filterTracking = []; // tuples
+            g.selectAll("path.chord")
+                .data(res)
+                .enter()
+                .append("path")
+                .attr("class", "chord")
+                .style("fill", function(d) { return colorScale(d.source.index);})
+                .style("opacity", 0.7)
+                .style("stroke", "black")
+                .attr("d", d3.ribbon()
+                    .radius(200)
+                )
+                .on("mouseover", function (d,i){
+                    // svg.selectAll("path.chord")
+                    //     .transition()
+                    //     .duration(300)
+                    //     .style("opacity", 0.1);
+                    d3.select(this)
+                    .transition()
+                    .duration(300)
+                    .style("opacity", 1);
+                    console.log(names[i.source.index] + " to " + names[i.target.index]);
+
+                    title.style("display", null)
+                            .attr("transform", `translate(10,10)`);
+
+                        // tooltip.style("display", null)
+                        // tooltip.attr("transform", "translate(500, 500)");
+
+                    title.select("#title").text("Chord from " + names[i.source.index].replace(/_/g, ' ') + " to " + names[i.target.index].replace(/_/g, ' '))
+                })
+                .on("mouseout", function (d,i){
+                    if (clicked === 0){
+                        svg.selectAll("path.chord")
+                        .transition()
+                        .duration(300)
+                        .style("opacity", 0.7);
+                    }else{
+                        svg.selectAll("path.chord:not(.clicked)")
+                        .transition()
+                        .duration(300)
+                        .style("opacity", 0.1);
+                    }
+
+                    title.style("display", "none")
+                })
+                .on("click", function(d,i){
+                    if (clicked === 0){
+                        svg.selectAll("path.chord")
+                        .transition()
+                        .duration(300)
+                        .style("opacity", 0.1);
+
+                        d3.select(this)
+                        .attr("class", "clicked")
+                        .transition()
+                        .duration(300)
+                        .style("opacity", 1);
+
+                        clicked ++;
+                        filterTracking.push([names[i.source.index], names[i.target.index]])
+                        console.log("first clicked", filterTracking);
+                    } else{
+                        //branch if something is already clicked
+                        var source = names[i.source.index]
+                        var target = names[i.target.index]
+                        let matchFound = false;
+                        for (let j=0; j<filterTracking.length;j++){
+                            if (filterTracking[j][0]===source && filterTracking[j][1]===target){
+                                if (clicked >1){
+                                    // there is more than one left 
+                                    d3.select(this)
+                                        .classed("clicked", false)
+                                        .transition()
+                                        .duration(300)
+                                        .style("opacity", 0.1);
+
+                                    filterTracking.splice(j, 1);
+                                    clicked --;
+                                    matchFound = true;
+                                    break;
+                                } else{
+                                    // only one left 
+                                    d3.select(this)
+                                    .classed("clicked", false)
+
+                                    svg.selectAll("path.chord")
+                                        .transition()
+                                        .duration(300)
+                                        .style("opacity", 0.7);
+                                    clicked --;
+                                    filterTracking.splice(j, 1);
+                                    matchFound = true;
+                                    break;
+                                }
+                                
+                            }
+
+                        }
+                        if(!matchFound){
+                            d3.select(this)
+                            .attr("class", "clicked")
+                            .transition()
+                            .duration(300)
+                            .style("opacity", 1);
+                            filterTracking.push([names[i.source.index], names[i.target.index]])
+                            clicked ++;
+                        }
+   
+                    }
+                    drawGraph()
+                });
+
+                var arc = d3.arc()
+                        .innerRadius(200)
+                        .outerRadius(210)
+
+                var outerArcs = g.selectAll("g.group")
+                    .data(res.groups)
+                    .enter().append("g")
+                    .attr("class", "group")
+                    // .on("mouseover", fade(.1))
+                    // .on("mouseout", fade(0.7))
+                    // .on("click", mouseoverChord)
+                    // .on("mouseout", mouseoutChord);
+
+                outerArcs.append("path")
+                .style("fill", function(d) { return colorScale(d.index); })
+                .attr("id", function(d, i) { return "group" + d.index; })
+                .attr("d", arc);
+
+                outerArcs.append("text")
+                .attr("x", 6)
+                .attr("dx", 20)
+                .attr("dy", 20)
+                .append("textPath")
+                .attr("href", function(d) { return "#group" + d.index;})
+                .text(function(chords, i){return names[i];})
+                .style("fill", "white");
+ 
+
+            // const requestData = async()=>{
+            //starting bubble diagram
+            const nwidth = 700;
+            const nheight = nwidth;
+            const nmargin = 1;
+            // const name = d => d.id.split(".").pop();
+            // const names = d => name(d).split(/(?=[A-Z][a-z])|\s+/g); // [
+
+        
+        
+            
+            //adding filters
+            let food_list = new Set();
+            let food_names = new Set();
+            // let category_list = new Set();
+            //create buttons
+            for (i = 0; i < sig.length; i++) {
+                let curr = sig[i];
+                if (!food_list.has(curr.food)) {
+                    food_list.add(curr.food);
+                }
+                // if(!category_list.he)
+            }
+
+            d3.select("#selectButton")
+                .selectAll("myOptions")
+                .data(food_list)
+                .join("option")
+                .text(d => d)
+                .attr("value", d => d);
+
+            let filter_container = d3.select(".filter-container")
+                filter_container.selectAll("button")
+                .data(names)
+                .join()
+                .append("button")
+                .text(d => d.replace(/_/g, ' '))
+                .attr("class", "type_button")
+                .style("font-family",  'Varela Round')
+                .on("click", clickType)
+
+
+            let filter = new Set();
+            let buttonClicked = false;
+
+            function clickType() {
+                typeButton = d3.select(this);
+                currType = typeButton.datum()
+
+                if (filter.has(currType)) {
+                    filter.delete(currType);
+                    typeButton.attr("class", "type_button")
+                }
+                else {
+                    filter.add(currType);
+                    typeButton.attr("class", "selected-type")
+                    console.log(filter)
+                }
+
+                // const filteredData = sig.filter(d => filter.has(d.characteristic));
+                
+
+                // let neighborhood = d3.selectAll(".neighborhood-label").nodes().map(node => node.id);
+                // console.log(neighborhood);
+
+                // if (neighborhood.length !== 0 && filteredData.length > 0) {
+                //     updatePoints(filteredData, neighborhood);
+                // }
+                // else if (neighborhood.length !== 0 && filteredData.length === 0) {
+                //     updatePoints(filteredData, neighborhood);
+                // }
+                // else {
+                //     updatePoints(filteredData);
+                // }
+                // console.log(filter.length)
+                if (filter.size > 0){
+                    buttonClicked = true;
+                }else{
+                    buttonClicked=false;
+                }
+                drawGraph()
+                updateChordDiagram()
+            }
+
+            function updateChordDiagram() {
+                let indexes = []
+                let specificChords
+                for (let i=0; i< filter.length; i++){
+                    console.log(filter[i])
+                    indexes.push(names.indexOf(filter[i]))
+                    console.log(indexes)
+                    specificChords = svg.selectAll("path.chord")
+                        .filter(d => d.source.index === i);
+                }
+                console.log(specificChords)
+                // specificChords.forEach(function() {
+                //     let chord = d3.select(this);
+                //     chord.dispatch('click'); // Dispatches a click event on each selected chord
+                // });
+                // svg.selectAll("path.chord")
+                //     .transition()
+                //     .duration(300)
+                //     .style("opacity", function(d) {
+                //         if (indexes.includes(d.source.index)) {
+                //             return 1; // Set opacity to the specified value for matching chords
+                //         } else {
+                //             return 0.1; // Set opacity to a lower value for non-matching chords
+                //         }
+                // });
+            }
+
+
+
+            function drawGraph(){
+                d3.select("#bubble-diagram").selectAll("*").remove();
+
+                const filteredData = sig.filter(d => filter.has(d.characteristic));
+                console.log(filteredData)
+
+                let filters = []
+                for (let i = 0; i < filterTracking.length; i++) {
+                    const tuple = filterTracking[i];
+                    for (let j = 0; j < tuple.length; j++) {
+                        const item = tuple[j];
+                        if (!filters.includes(item)) {
+                            filters.push(item);
+                        }
+                    }
+                }
+
+                let filtered;
+                if (buttonClicked){
+                    filtered = filteredData.filter(item => filters.includes(item.characteristic));
+                }else{
+                    filtered = sig.filter(item => filters.includes(item.characteristic));
+                }
+
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+                    }
+                    return array;
+                }
+
+                let shuffledData = shuffleArray(filtered);
+                shuffleArray(sig)
+                
+                const color = ["#F97068","#589D87"]
+                const redGreenScale = d3.scaleOrdinal().domain(["significant", "not significant"]).range(color)
+
+                const radiusExtent = d3.extent(sig, d => d["p_values"])
+                const radiusScale = d3.scaleLinear().domain(radiusExtent).range([10, 40])
+                    
+                const pack = d3.pack()
+                    .size([nwidth - nmargin * 2, nheight - nmargin * 2])
+                    .padding(5);
+
+                // if (filters.length !=0){
+                //     const root = pack(d3.hierarchy({ children: filtered})
+                //     .sum(d => d.p_values)); 
+                // }
+                // const root = pack(d3.hierarchy({ children: sig})
+                //     .sum(d => d.p_values)); 
+                let root;
+                if (filters.length !== 0) {
+                    console.log("chord branch")
+                    root = pack(d3.hierarchy({ children: filtered}).sum(d => d.p_values)); 
+                } else if (buttonClicked){
+                    console.log("button branch")
+                    root = pack(d3.hierarchy({ children: filteredData }).sum(d => d.p_values)); 
+                }
+                else {
+                    root = pack(d3.hierarchy({ children: sig}).sum(d => d.p_values)); 
+                }
+
+                const bubb = d3.select("#bubble-diagram")
+                    .attr("viewBox", [-nmargin, -nmargin, nwidth, nheight])
+                    .attr("style", "display: inline-block; max-width: 100%; height: auto; font: 10px sans-serif;")
+                    .attr("text-anchor", "middle");
+
+                const nodes = bubb.append("g")
+                    .selectAll()
+                    .data(root.leaves())
+                    .join("g")
+                    .attr("transform", d => `translate(${d.x},${d.y})`);
+
+                const tooltip = bubb.append("g")
+                    .attr("class", "tooltip")
+                    .style("display", "none");
+
+                tooltip.append("rect")
+                    .attr("width", 250)
+                    .attr("height", 100)
+                    .attr("fill", "white")
+                    .attr("stroke", "#5B6C9A")
+                    .attr("stroke-width", "2px")
+                    .attr("rx", 20) 
+                    .attr("ry", 20)
+                    
+
+                tooltip.append("text")
+                    .attr("id", "text1")
+                    .attr("x", 125)
+                    .attr("y", 20)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "13px")
+                    .style("font-family",  'Varela Round')
+
+                tooltip.append("text")
+                .attr("id", "text2")
+                .attr("x", 125)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "11px")
+                .style("font-family",  'Varela Round')
+
+                tooltip.append("text")
+                .attr("id", "text3")
+                .attr("x", 125)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "11px")
+                .style("font-family",  'Varela Round')
+
+                tooltip.append("text")
+                .attr("id", "text4")
+                .attr("x", 125)
+                .attr("y", 20)
+                .attr("text-anchor", "middle")
+                .style("font-size", "11px")
+                .style("font-family",  'Varela Round')
+
+                nodes.append("circle")
+                    .attr("cx", 0) 
+                    .attr("cy", 0) 
+                    .attr("fill-opacity", 0.7)
+                    .attr("fill", d => redGreenScale(d.data.significant)) 
+                    .attr("stroke", "black")
+                    .attr("r", d=> radiusScale(d.data.p_values))
+                    .on("mouseover", function(d, i){
+                        tooltip.raise()
+                        d3.select(this)
+                            .attr("fill-opacity", 1)
+                        console.log(i.data.food)
+                        console.log(i.data.characteristic)
+
+                        var x= d3.select(this).attr("cx");
+                        var y= d3.select(this).attr("cy");
+                        const tooltipX = x + 100; // 100 units to the right
+                        const tooltipY = y + 100; // 100 units down
+
+                        tooltip.style("display", null)
+                            .attr("transform", `translate(${tooltipX},${tooltipY})`);
+
+                        // tooltip.style("display", null)
+                        // tooltip.attr("transform", "translate(500, 500)");
+
+                        tooltip.select("#text1").text(i.data.food_name);
+                        tooltip.select("#text2").text("Characteristic: " + i.data.characteristic.replace(/_/g, ' ')).attr("x", 125).attr("y", 40).attr("text-anchor", "middle")
+                        tooltip.select("#text3").text("p-value: " + i.data.p_value).attr("x", 125).attr("y", 55).attr("text-anchor", "middle")
+                        tooltip.select("#text4").text("Significance: " + i.data.significant).attr("x", 125).attr("y", 70).attr("text-anchor", "middle")
+                    })
+                .on("mouseout", function(d,i){
+                    d3.select(this)
+                            .attr("fill-opacity", 0.7)
+
+                    tooltip.style("display", "none")
+                }); 
+
+                const simulation = d3.forceSimulation(root.leaves())
+                .force('charge', d3.forceManyBody().strength(3))
+                .force('collision', d3.forceCollide().radius(function(d) { return radiusScale(d.data.p_values) + 1; }))
+                .on('tick', function() {
+                    // Update the position of nodes during each tick of the simulation
+                    nodes.attr('transform', d => `translate(${d.x},${d.y})`);
+                });
+
+                    // Define drag behavior
+                const drag = d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended);
+
+                // Attach drag behavior to nodes
+                nodes.call(drag);
+
+                // Drag event handlers
+                function dragstarted(event, d) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart(); // Restart simulation
+                    d.fx = d.x; // Fix x position of dragged node
+                    d.fy = d.y; // Fix y position of dragged node
+                }
+
+                function dragged(event, d) {
+                    d.fx = event.x; // Update fixed x position of dragged node
+                    d.fy = event.y; // Update fixed y position of dragged node
+                }
+
+                function dragended(event, d) {
+                    if (!event.active) simulation.alphaTarget(0); // Stop simulation if not already running
+                    d.fx = null; // Release fixed x position of dragged node
+                    d.fy = null; // Release fixed y position of dragged node
+                    simulation.restart(); // Restart simulation if not already running
+                }
+
+//                 bubb.on("mousemove", function() {
+//   fisheye.focus(d3.mouse(this));
+// });
+            //fix
+            //const text = bubb.append("text")
+            //     .attr("clip-path", d => `circle(${d.r})`);
+
+            // text.selectAll("tspan")
+            //     .data(d => names(d.sig))
+            //     .join("tspan")
+            //     .attr("x", 0)
+            //     .attr("y", (d, i, nodes) => `${i - nodes.length / 2 + 0.35}em`)
+            //     .text(d => d.food);
+
+            // text.append("tspan")
+            //     .attr("x", 0)
+            //     .attr("y", d => `${names(d.data).length / 2 + 0.35}em`)
+            //     .attr("fill-opacity", 0.7)
+            //     .text(d => format(d.food)); 
+
+            // return Object.assign(svg.node(), {scales: {color}});
+
+            //creating filters
+            
+            }
+            drawGraph()
+        }
+        requestData()
+
+        
+
+            
+
+            
+        
+        </script>
+        <!-- <script src="fisheye.js"></script> -->
+        <script src="https://d3js.org/d3-fisheye.v0.2.min.js"></script>
+
+
+    </body>
+</html>
